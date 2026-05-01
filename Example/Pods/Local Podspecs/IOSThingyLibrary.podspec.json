@@ -1,6 +1,6 @@
 {
   "name": "IOSThingyLibrary",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "summary": "A Swift 5 SDK implementation for the Nordic Thingy:52 produced by Nordic Semiconductor",
   "description": "This is a mobile SDK for the Thingy:52 devices developed by Nordic Semiconductor. Thingy:52\nis a development board with a vast amount of sensors, an input button and an RGB LED, fully\ncustomizable thanks to its Bluetooth LE API that requires no firmware programming knowledge.\nThis SDK takes it a step further by allowing developers create their own Thingy:52 compatible\napplications with ease.",
   "homepage": "https://www.nordicsemi.com",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/NordicSemiconductor/IOS-Nordic-Thingy.git",
-    "tag": "1.5.3"
+    "tag": "1.5.4"
   },
   "social_media_url": "https://twitter.com/nordictweets",
   "swift_versions": [

@@ -4,7 +4,7 @@ use_frameworks!
 target 'ThingySDK_Example' do
   pod 'IOSThingyLibrary', :path => '../'
   pod 'Charts', '~> 4'
-  pod 'SDCAlertView', '~> 10.0'
+  pod 'SDCAlertView', '~> 12.0'
   pod 'SWRevealViewController', '~> 2'
   pod 'KeychainSwift', '~> 20.0'
 end

@@ -22,6 +22,7 @@ public enum ActionLayout: Int {
 }
 
 @objc(SDCAlertController)
+@available(iOSApplicationExtension, unavailable)
 public final class AlertController: UIViewController {
     private var verticalCenter: NSLayoutConstraint?
 
@@ -110,6 +111,10 @@ public final class AlertController: UIViewController {
     /// on an action. If it returns false, the AlertAction handler will not be executed.
     @objc
     public var shouldDismissHandler: ((AlertAction?) -> Bool)?
+    
+    /// A closure called before the alert is dismissed but only if done by own method and not manually
+    @objc
+    public var willDismissHandler: (() -> Void)?
 
     /// A closure called when the alert is dismissed after an outside tap (when `dismissOnOutsideTap` behavior
     /// is enabled)
@@ -125,7 +130,8 @@ public final class AlertController: UIViewController {
     public let preferredStyle: AlertControllerStyle
 
     private let alert: UIView & AlertControllerViewRepresentable
-    private lazy var transitionDelegate: Transition = Transition(alertStyle: self.preferredStyle)
+    private lazy var transitionDelegate = SDCTransition(alertStyle: self.preferredStyle,
+                                                     dimmingViewColor: self.visualStyle.dimmingColor)
 
     // MARK: - Initialization
 
@@ -169,13 +175,7 @@ public final class AlertController: UIViewController {
             self.alert = AlertView()
 
         case .actionSheet:
-            let nibName = String(describing: ActionSheetView.self)
-            let objects = Bundle.resourceBundle.loadNibNamed(nibName, owner: nil, options: nil)
-            if let actionSheet = objects?.first as? ActionSheetView {
-                self.alert = actionSheet
-            } else {
-                self.alert = AlertView()
-            }
+            self.alert = ActionSheetView()
         }
 
         self.preferredStyle = preferredStyle
@@ -239,6 +239,12 @@ public final class AlertController: UIViewController {
     /// - parameter completion: An optional closure that's called when the dismissal finishes.
     @objc(dismissViewControllerAnimated:completion:)
     public override func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+        guard presentedViewController == nil else {
+            super.dismiss(animated: animated, completion: completion)
+            return
+        }
+
+        self.willDismissHandler?()
         self.presentingViewController?.dismiss(animated: animated, completion: completion)
     }
 
@@ -283,18 +289,27 @@ public final class AlertController: UIViewController {
 
     private func listenForKeyboardChanges() {
         NotificationCenter.default
-            .addObserver(self, selector: #selector(self.keyboardChange),
-                         name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+            .addObserver(self, selector: #selector(keyboardWillShow),
+                         name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(keyboardWillHide),
+                         name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc
-    private func keyboardChange(_ notification: Notification) {
+    private func keyboardWillShow(notification: NSNotification) {
         let newFrameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         guard let newFrame = newFrameValue?.cgRectValue else {
             return
         }
 
         self.verticalCenter?.constant = -newFrame.height / 2
+        self.alert.layoutIfNeeded()
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        self.verticalCenter?.constant = 0
         self.alert.layoutIfNeeded()
     }
 
