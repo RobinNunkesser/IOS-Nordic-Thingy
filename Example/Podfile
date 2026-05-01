@@ -6,7 +6,7 @@ target 'ThingySDK_Example' do
   pod 'Charts', '~> 4'
   pod 'SDCAlertView', '~> 10.0'
   pod 'SWRevealViewController', '~> 2'
-  pod 'KeychainSwift', '~> 20.0'
+  pod 'KeychainSwift', '~> 24.0'
 end
 
 post_install do |installer|

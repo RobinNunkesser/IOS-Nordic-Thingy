@@ -5,9 +5,9 @@ PODS:
     - SwiftAlgorithms (~> 1.0)
   - iOSDFULibrary (4.13.0):
     - ZIPFoundation (= 0.9.11)
-  - IOSThingyLibrary (1.5.3):
+  - IOSThingyLibrary (1.5.4):
     - iOSDFULibrary (~> 4.13.0)
-  - KeychainSwift (20.0.0)
+  - KeychainSwift (24.0.0)
   - SDCAlertView (10.0)
   - SwiftAlgorithms (1.0.0)
   - SWRevealViewController (2.3.0)
@@ -16,7 +16,7 @@ PODS:
 DEPENDENCIES:
   - Charts (~> 4)
   - IOSThingyLibrary (from `../`)
-  - KeychainSwift (~> 20.0)
+  - KeychainSwift (~> 24.0)
   - SDCAlertView (~> 10.0)
   - SWRevealViewController (~> 2)
 
@@ -35,15 +35,15 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Charts: 354f86803d11d9c35de280587fef50d1af063978
-  iOSDFULibrary: 3b9de67ed4bfb901b5f09c2fea843f65e152612d
-  IOSThingyLibrary: 21a720666ffa4a1ff0ee21b65ce4468d895b6dac
-  KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
+  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
+  iOSDFULibrary: ae1bcb1cb921e6e3ff551755f6fdff1b77e07e15
+  IOSThingyLibrary: 0e0f8f2702422ab4de9c06ecc943abd2b734d0ab
+  KeychainSwift: 007c4647486e4563adca839cf02cef00deb3b670
   SDCAlertView: 5fbc48cae6d7bf9781097e3f27883924ef3b922c
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 6688313cd462b7254fee68155ea24e515f9d0ad1
+PODFILE CHECKSUM: 304afc134c285fd22f44ed789b5a42b86dfb8887
 
 COCOAPODS: 1.12.0
