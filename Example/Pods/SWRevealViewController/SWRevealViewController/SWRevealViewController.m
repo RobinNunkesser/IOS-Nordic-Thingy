@@ -35,15 +35,23 @@
 // it will return the statusBar height if view fully overlaps the statusBar, otherwise returns 0.0f
 static CGFloat statusBarAdjustment( UIView* view )
 {
+#if TARGET_OS_MACCATALYST
+    // statusBarFrame is not available on Mac Catalyst
+    return 0.0f;
+#else
     CGFloat adjustment = 0.0f;
     UIApplication *app = [UIApplication sharedApplication];
     CGRect viewFrame = [view convertRect:view.bounds toView:[app keyWindow]];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     CGRect statusBarFrame = [app statusBarFrame];
+#pragma clang diagnostic pop
     
     if ( CGRectIntersectsRect(viewFrame, statusBarFrame) )
         adjustment = fminf(statusBarFrame.size.width, statusBarFrame.size.height);
 
     return adjustment;
+#endif
 }
 
 
