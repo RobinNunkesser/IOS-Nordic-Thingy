@@ -43,7 +43,9 @@
 
 import UIKit
 import IOSThingyLibrary
+#if canImport(CoreNFC)
 import CoreNFC
+#endif
 
 class MainEmptyConfigurationViewController: SwipableViewController {
 
@@ -82,7 +84,11 @@ class MainEmptyConfigurationViewController: SwipableViewController {
         addThingyButton.layer.masksToBounds = true
         addThingyButton.setBackgroundColor(color: UIColor.nordicLakeDark, forState: .highlighted)
         
+#if canImport(CoreNFC)
         addThingyNFCButton.isHidden = !NFCNDEFReaderSession.readingAvailable
+#else
+        addThingyNFCButton.isHidden = true
+#endif
     }
     
     override func targetPeripheralDidChange(new: ThingyPeripheral?) {
