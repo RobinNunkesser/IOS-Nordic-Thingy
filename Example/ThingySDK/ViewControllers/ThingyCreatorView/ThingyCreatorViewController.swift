@@ -44,7 +44,9 @@
 import UIKit
 import SWRevealViewController
 import IOSThingyLibrary
+#if canImport(CoreNFC)
 import CoreNFC
+#endif
 
 class ThingyCreatorViewController: ThingyViewController, ThingyManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -192,11 +194,15 @@ class ThingyCreatorViewController: ThingyViewController, ThingyManagerDelegate, 
     }
 
     private func deviceHasNFCCapabilities() -> Bool {
+#if canImport(CoreNFC)
         if #available(iOS 11.0, *) {
             return NFCNDEFReaderSession.readingAvailable
         } else {
             return false
         }
+#else
+        return false
+#endif
     }
     
     private func showNFCView() {
