@@ -42,7 +42,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<false/>
+	<true/>
 	<key>NFCReaderUsageDescription</key>
 	<string>The app will pair your Thingy device using NFC.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
