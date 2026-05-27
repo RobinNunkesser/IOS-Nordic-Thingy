@@ -44,6 +44,7 @@
 import UIKit
 import SWRevealViewController
 import IOSThingyLibrary
+#if canImport(CoreNFC)
 import CoreNFC
 
 @available(iOS 11.0, *)
@@ -234,3 +235,4 @@ class ThingyNFCCreatorViewController: ThingyViewController, ThingyManagerDelegat
         }
     }
 }
+#endif // canImport(CoreNFC)
